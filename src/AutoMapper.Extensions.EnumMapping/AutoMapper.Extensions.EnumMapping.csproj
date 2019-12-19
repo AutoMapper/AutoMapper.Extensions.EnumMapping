@@ -6,7 +6,7 @@
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>AutoMapper.Extensions.EnumMapping</AssemblyName>
-    <AssemblyOriginatorKeyFile>..\..\AutoMapper.Extensions.EnumMapping.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\AutoMapper.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>AutoMapper.Extensions.EnumMapping</PackageId>
@@ -34,6 +34,10 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.1.0-ci-*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19423-01" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
