@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Summary>A convention-based extension to AutoMapper for enum mapping.</Summary>
-    <Description>A convention-based extension to AutoMapper for enum mapping.</Description>
+    <Summary>Convention-based enum value mapping extension for AutoMapper.</Summary>
+    <Description>Convention-based enum value mapping extension for AutoMapper.</Description>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>AutoMapper.Extensions.EnumMapping</AssemblyName>

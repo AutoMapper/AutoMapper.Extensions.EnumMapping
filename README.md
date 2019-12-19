@@ -1,16 +1,13 @@
-#AutoMapper.Extensions.EnumMapping
+AutoMapper.Extensions.EnumMapping
 ===========
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/jbogard/AutoMapper.Extensions.EnumMapping?branch=master&svg=true)](https://ci.appveyor.com/project/AutoMapper/AutoMapper-Extensions-EnumMapping) 
 [![NuGet](https://img.shields.io/nuget/dt/AutoMapper.Extensions.EnumMapping.svg)](https://www.nuget.org/packages/AutoMapper.Extensions.EnumMapping) 
 [![NuGet](https://img.shields.io/nuget/vpre/AutoMapper.Extensions.EnumMapping.svg)](https://www.nuget.org/packages/AutoMapper.Extensions.EnumMapping)
-
-<!--
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/AutoMapper/AutoMapper.Extensions.EnumMapping?branch=master&svg=true)](https://ci.appveyor.com/project/AutoMapper/Enums-Extensions-AutoMapper) 
-[![BCH compliance](https://bettercodehub.com/edge/badge/AutoMapper/AutoMapper.Extensions.EnumMapping?branch=master)](https://bettercodehub.com/)
--->
+[![MyGet (dev)](https://img.shields.io/myget/automapperdev/v/AutoMapper.Extensions.EnumMapping.svg)](http://myget.org/gallery/automapperdev)
 
 ### Summary
 
-The AutoMapper.Extensions.EnumMapping library solves the problem of mapping enum values. Normally enums are automatically mapped bij AutoMapper as an integer, but you have no control about custom mappings. It is possible to create a custom type converter for every enum.
+The AutoMapper.Extensions.EnumMapping library gives you control about your enum values mappings. Normally enums are automatically mapped bij AutoMapper as an integer, but you have no control about custom mappings. It is possible to create a custom type converter for every enum.
 
 This library supports mapping enums values like properties.
 
