@@ -1,6 +1,6 @@
 AutoMapper.Extensions.EnumMapping
 ===========
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/jbogard/AutoMapper.Extensions.EnumMapping?branch=master&svg=true)](https://ci.appveyor.com/project/AutoMapper/AutoMapper-Extensions-EnumMapping) 
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/jbogard/AutoMapper.Extensions.EnumMapping?branch=master&svg=true)](https://ci.appveyor.com/project/jbogard/automapper-extensions-enummapping) 
 [![NuGet](https://img.shields.io/nuget/dt/AutoMapper.Extensions.EnumMapping.svg)](https://www.nuget.org/packages/AutoMapper.Extensions.EnumMapping) 
 [![NuGet](https://img.shields.io/nuget/vpre/AutoMapper.Extensions.EnumMapping.svg)](https://www.nuget.org/packages/AutoMapper.Extensions.EnumMapping)
 [![MyGet (dev)](https://img.shields.io/myget/automapperdev/v/AutoMapper.Extensions.EnumMapping.svg)](http://myget.org/gallery/automapperdev)
