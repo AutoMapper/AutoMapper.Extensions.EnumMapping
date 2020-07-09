@@ -1,6 +1,6 @@
 AutoMapper.Extensions.EnumMapping
 ===========
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/automapper/automapper.extensions.enummapping?branch=master&svg=true)](https://ci.appveyor.com/project/jbogard/automapper-extensions-enummapping) 
+[![CI](https://github.com/automapper/automapper.extensions.microsoft.dependencyinjection/workflows/CI/badge.svg)](https://github.com/automapper/automapper.extensions.microsoft.dependencyinjection/workflows/CI)
 [![NuGet](https://img.shields.io/nuget/dt/AutoMapper.Extensions.EnumMapping.svg)](https://www.nuget.org/packages/AutoMapper.Extensions.EnumMapping) 
 [![NuGet](https://img.shields.io/nuget/vpre/AutoMapper.Extensions.EnumMapping.svg)](https://www.nuget.org/packages/AutoMapper.Extensions.EnumMapping)
 [![MyGet (dev)](https://img.shields.io/myget/automapperdev/v/AutoMapper.Extensions.EnumMapping.svg)](http://myget.org/gallery/automapperdev)
@@ -15,7 +15,7 @@ This library is Cross-platform, supporting `netstandard2.0` and `net461`.
 
 ### Dependencies
 
-- [AutoMapper](https://www.nuget.org/packages/AutoMapper/) (from version 9.1.0)
+- [AutoMapper](https://www.nuget.org/packages/AutoMapper/) (from version 10.0)
 
 ### Installing AutoMapper.Extensions.EnumMapping
 
