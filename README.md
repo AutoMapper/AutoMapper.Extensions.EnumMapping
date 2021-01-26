@@ -7,7 +7,7 @@ AutoMapper.Extensions.EnumMapping
 
 ### Summary
 
-The AutoMapper.Extensions.EnumMapping library gives you control about your enum values mappings. Normally enums are automatically mapped bij AutoMapper as an integer, but you have no control about custom mappings. It is possible to create a custom type converter for every enum.
+The AutoMapper.Extensions.EnumMapping library gives you control about your enum values mappings. It is possible to create a custom type converter for every enum.
 
 This library supports mapping enums values like properties.
 
