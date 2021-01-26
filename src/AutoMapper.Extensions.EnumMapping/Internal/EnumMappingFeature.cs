@@ -10,6 +10,8 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
         where TDestination : struct, Enum
     {
         protected EnumMappingType EnumMappingType = EnumMappingType.Value;
+        protected bool IgnoreCase = true;
+
         protected readonly Dictionary<TSource, TDestination> EnumValueMappingsOverride = new Dictionary<TSource, TDestination>();
 
         public void Configure(TypeMap typeMap)
@@ -50,15 +52,13 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
 
             if (EnumMappingType == EnumMappingType.Name)
             {
-                const bool ignoreCase = false;
-
                 foreach (TDestination destinationEnumValue in destinationEnumValues)
                 {
                     var destinationEnumName = Enum.GetName(destinationType, destinationEnumValue);
 
                     if (!string.IsNullOrWhiteSpace(destinationEnumName))
                     {
-                        if (Enum.TryParse(destinationEnumName, ignoreCase, out TSource sourceEnumValue))
+                        if (Enum.TryParse(destinationEnumName, IgnoreCase, out TSource sourceEnumValue))
                         {
                             enumValueMappings.Add(sourceEnumValue, destinationEnumValue);
                         }
@@ -89,9 +89,10 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
             return enumValueMappings;
         }
 
-        public IEnumConfigurationExpression<TSource, TDestination> MapByName()
+        public IEnumConfigurationExpression<TSource, TDestination> MapByName(bool ignoreCase = false)
         {
             EnumMappingType = EnumMappingType.Name;
+            IgnoreCase = ignoreCase;
             return this;
         }
 
@@ -113,7 +114,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
 
             if (EnumMappingType == EnumMappingType.Name)
             {
-                reverseEnumConfigurationExpression.MapByName();
+                reverseEnumConfigurationExpression.MapByName(IgnoreCase);
             }
             else
             {

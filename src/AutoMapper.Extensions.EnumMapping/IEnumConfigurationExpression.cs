@@ -15,7 +15,7 @@ namespace AutoMapper.Extensions.EnumMapping
         /// Map enum values by name
         /// </summary>
         /// <returns>Enum configuration options</returns>
-        IEnumConfigurationExpression<TSource, TDestination> MapByName();
+        IEnumConfigurationExpression<TSource, TDestination> MapByName(bool ignoreCase = false);
 
         /// <summary>
         /// (default) Map enum values by value (underlying value type)
