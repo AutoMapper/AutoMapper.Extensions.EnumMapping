@@ -10,7 +10,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
         where TDestination : struct, Enum
     {
         protected EnumMappingType EnumMappingType = EnumMappingType.Value;
-        protected bool IgnoreCase = true;
+        protected bool IgnoreCase;
 
         protected readonly Dictionary<TSource, TDestination> EnumValueMappingsOverride = new Dictionary<TSource, TDestination>();
 

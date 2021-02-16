@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper.Extensions.EnumMapping.Tests.Internal;
 using Shouldly;
 using Xunit;

@@ -14,6 +14,7 @@ namespace AutoMapper.Extensions.EnumMapping
         /// <summary>
         /// Map enum values by name
         /// </summary>
+        /// <param name="ignoreCase">Optional, ignore casing for enum value names</param>
         /// <returns>Enum configuration options</returns>
         IEnumConfigurationExpression<TSource, TDestination> MapByName(bool ignoreCase = false);
 
