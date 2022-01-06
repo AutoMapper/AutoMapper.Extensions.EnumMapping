@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper.Extensions.EnumMapping.Internal;
+using AutoMapper.Internal;
 
 namespace AutoMapper.Extensions.EnumMapping
 {
@@ -14,7 +15,7 @@ namespace AutoMapper.Extensions.EnumMapping
         /// <param name="mapperConfigurationExpression">Configuration object for AutoMapper</param>
         public static void EnableEnumMappingValidation(this IMapperConfigurationExpression mapperConfigurationExpression)
         {
-            mapperConfigurationExpression.Advanced.Validator(context =>
+            mapperConfigurationExpression.Internal().Validator(context =>
             {
                 if (context.TypeMap != null)
                 {

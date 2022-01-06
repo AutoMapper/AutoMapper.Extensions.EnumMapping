@@ -1,4 +1,5 @@
 ﻿using AutoMapper.Features;
+using AutoMapper.Internal;
 
 namespace AutoMapper.Extensions.EnumMapping.Internal
 {

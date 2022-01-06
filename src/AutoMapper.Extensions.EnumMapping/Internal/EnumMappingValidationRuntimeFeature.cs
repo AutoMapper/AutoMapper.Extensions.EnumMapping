@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoMapper.Internal;
 
 namespace AutoMapper.Extensions.EnumMapping.Internal
 {
@@ -17,7 +18,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
             _enumMappingType = enumMappingType;
         }
 
-        public void Seal(IConfigurationProvider configurationProvider)
+        public void Seal(IGlobalConfiguration configurationProvider)
         {
         }
 
