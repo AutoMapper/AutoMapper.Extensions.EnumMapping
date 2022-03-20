@@ -14,6 +14,7 @@
     <PackageId>AutoMapper.Extensions.EnumMapping</PackageId>
     <PackageProjectUrl>https://automapper.org</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <MinVerTagPrefix>v</MinVerTagPrefix>
@@ -26,8 +27,6 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="[11.0, 12.0)" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +36,7 @@
 
   <ItemGroup>
     <None Include="..\..\icon.png" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
