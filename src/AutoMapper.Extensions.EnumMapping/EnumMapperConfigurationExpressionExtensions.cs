@@ -19,7 +19,7 @@ namespace AutoMapper.Extensions.EnumMapping
             {
                 if (context.TypeMap != null)
                 {
-                    var validator = context.TypeMap.Features.OfType<IEnumMappingValidationRuntimeFeature>().SingleOrDefault();
+                    var validator = context.TypeMap.Features.Get<IEnumMappingValidationRuntimeFeature>();
                     validator?.Validate(context.TypeMap.Types);
                 }
             });
