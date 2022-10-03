@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper.Execution;
 using AutoMapper.Features;
 
 namespace AutoMapper.Extensions.EnumMapping.Internal
@@ -21,14 +22,15 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
                 throw new ArgumentException($"The type {typeMap.SourceType.FullName} can not be configured as an Enum, because it is not an Enum");
             }
 
-            if (!typeMap.DestinationTypeToUse.IsEnum)
+            if (!typeMap.DestinationType.IsEnum)
             {
-                throw new ArgumentException($"The type {typeMap.DestinationTypeToUse.FullName} can not be configured as an Enum, because it is not an Enum");
+                throw new ArgumentException($"The type {typeMap.DestinationType.FullName} can not be configured as an Enum, because it is not an Enum");
             }
 
-            var enumValueMappings = CreateOverridedEnumValueMappings(typeMap.SourceType, typeMap.DestinationTypeToUse);
+            var enumValueMappings = CreateOverridedEnumValueMappings(typeMap.SourceType, typeMap.DestinationType);
 
-            typeMap.CustomMapExpression = new CustomMapExpressionFactory<TSource, TDestination>(enumValueMappings).Create();
+            var lambdaExpression = new CustomMapExpressionFactory<TSource, TDestination>(enumValueMappings).Create();
+            typeMap.TypeConverter = new ExpressionTypeConverter(lambdaExpression);
             typeMap.Features.Set(new EnumMappingValidationRuntimeFeature<TSource, TDestination>(enumValueMappings, EnumMappingType));
         }
 
