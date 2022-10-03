@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper.Execution;
 using AutoMapper.Features;
 
 namespace AutoMapper.Extensions.EnumMapping.Internal
@@ -28,7 +29,8 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
 
             var enumValueMappings = CreateOverridedEnumValueMappings(typeMap.SourceType, typeMap.DestinationType);
 
-            typeMap.CustomMapExpression = new CustomMapExpressionFactory<TSource, TDestination>(enumValueMappings).Create();
+            var lambdaExpression = new CustomMapExpressionFactory<TSource, TDestination>(enumValueMappings).Create();
+            typeMap.TypeConverter = new ExpressionTypeConverter(lambdaExpression);
             typeMap.Features.Set(new EnumMappingValidationRuntimeFeature<TSource, TDestination>(enumValueMappings, EnumMappingType));
         }
 
