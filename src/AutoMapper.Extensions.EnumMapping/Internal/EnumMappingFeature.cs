@@ -31,7 +31,9 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
 
             var lambdaExpression = new CustomMapExpressionFactory<TSource, TDestination>(enumValueMappings).Create();
             typeMap.TypeConverter = new ExpressionTypeConverter(lambdaExpression);
-            typeMap.Features.Set(new EnumMappingValidationRuntimeFeature<TSource, TDestination>(enumValueMappings, EnumMappingType));
+            typeMap.Features.Set(new EnumMappingValidationRuntimeFeatureProxy(
+                new EnumMappingValidationRuntimeFeature<TSource, TDestination>(enumValueMappings, EnumMappingType)
+            ));
         }
 
         private Dictionary<TSource, TDestination> CreateOverridedEnumValueMappings(Type sourceType, Type destinationType)

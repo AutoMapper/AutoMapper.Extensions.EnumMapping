@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using AutoMapper.Extensions.EnumMapping.Internal;
+﻿using AutoMapper.Extensions.EnumMapping.Internal;
 using AutoMapper.Internal;
 
 namespace AutoMapper.Extensions.EnumMapping
@@ -19,13 +18,9 @@ namespace AutoMapper.Extensions.EnumMapping
             {
                 if (context.TypeMap != null)
                 {
-                    foreach (var feature in context.TypeMap.Features)
-                    {
-                        if (feature is IEnumMappingValidationRuntimeFeature validator)
-                        {
-                            validator.Validate(context.TypeMap.Types);
-                        }
-                    }
+                    var validator = context.TypeMap.Features.Get<EnumMappingValidationRuntimeFeatureProxy>();
+
+                    validator?.Validate(context.TypeMap.Types);
                 }
             });
         }
