@@ -6,7 +6,7 @@ public class EnumMappingValidation
 {
     public class Default : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
+        protected override MapperConfiguration Configuration { get; } = new(cfg =>
         {
             cfg.EnableEnumMappingValidation();
             cfg.CreateMap<object, object>();
