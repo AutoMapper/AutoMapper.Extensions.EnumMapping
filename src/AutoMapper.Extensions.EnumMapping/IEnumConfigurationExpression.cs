@@ -29,5 +29,7 @@ namespace AutoMapper.Extensions.EnumMapping
         /// </summary>
         /// <returns>Enum configuration options</returns>
         IEnumConfigurationExpression<TSource, TDestination> MapValue(TSource source, TDestination destination);
+        
+        IEnumConfigurationExpression<TSource, TDestination> MapException(TSource source, Func<Exception> destination);
     }
 }

@@ -9,10 +9,10 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
         where TSource : struct, Enum
         where TDestination : struct, Enum
     {
-        private readonly Dictionary<TSource, TDestination> _enumValueMappings;
+        private readonly Dictionary<TSource, GetDestinationObject<TDestination>> _enumValueMappings;
         private readonly EnumMappingType _enumMappingType;
 
-        public EnumMappingValidationRuntimeFeature(Dictionary<TSource, TDestination> enumValueMappings, EnumMappingType enumMappingType)
+        public EnumMappingValidationRuntimeFeature(Dictionary<TSource, GetDestinationObject<TDestination>> enumValueMappings, EnumMappingType enumMappingType)
         {
             _enumValueMappings = enumValueMappings;
             _enumMappingType = enumMappingType;
