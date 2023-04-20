@@ -13,7 +13,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
         protected EnumMappingType EnumMappingType = EnumMappingType.Value;
         protected bool IgnoreCase;
 
-        protected readonly Dictionary<TSource, TDestination> EnumValueMappingsOverride = new Dictionary<TSource, TDestination>();
+        protected readonly Dictionary<TSource, GetDestinationObject<TDestination>> EnumValueMappingsOverride = new();
 
         public void Configure(TypeMap typeMap)
         {
@@ -36,7 +36,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
             ));
         }
 
-        private Dictionary<TSource, TDestination> CreateOverridedEnumValueMappings(Type sourceType, Type destinationType)
+        private Dictionary<TSource, GetDestinationObject<TDestination>> CreateOverridedEnumValueMappings(Type sourceType, Type destinationType)
         {
             var enumValueMappings = CreateDefaultEnumValueMappings(sourceType, destinationType);
 
@@ -48,9 +48,9 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
             return enumValueMappings;
         }
 
-        private Dictionary<TSource, TDestination> CreateDefaultEnumValueMappings(Type sourceType, Type destinationType)
+        private Dictionary<TSource, GetDestinationObject<TDestination>> CreateDefaultEnumValueMappings(Type sourceType, Type destinationType)
         {
-            var enumValueMappings = new Dictionary<TSource, TDestination>();
+            var enumValueMappings = new Dictionary<TSource, GetDestinationObject<TDestination>>();
 
             var destinationEnumValues = Enum.GetValues(destinationType);
 
@@ -64,7 +64,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
                     {
                         if (Enum.TryParse(destinationEnumName, IgnoreCase, out TSource sourceEnumValue))
                         {
-                            enumValueMappings.Add(sourceEnumValue, destinationEnumValue);
+                            enumValueMappings.Add(sourceEnumValue, GetDestinationObject.Value(destinationEnumValue));
                         }
                     }
                 }
@@ -84,7 +84,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
 
                         if (compareSource.Equals(compareDestination))
                         {
-                            enumValueMappings.Add(sourceEnumValue, destinationEnumValue);
+                            enumValueMappings.Add(sourceEnumValue, GetDestinationObject.Value(destinationEnumValue));
                         }
                     }
                 }
@@ -108,7 +108,13 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
 
         public IEnumConfigurationExpression<TSource, TDestination> MapValue(TSource source, TDestination destination)
         {
-            EnumValueMappingsOverride[source] = destination;
+            EnumValueMappingsOverride[source] = GetDestinationObject.Value(destination);
+            return this;
+        }
+
+        public IEnumConfigurationExpression<TSource, TDestination> MapException(TSource source, Func<Exception> throwExceptionFunc)
+        {
+            EnumValueMappingsOverride[source] = GetDestinationObject.Exception<TDestination>(throwExceptionFunc);
             return this;
         }
 
@@ -134,7 +140,15 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
             var destinationsPerSourceMappings = enumValueMappings.GroupBy(g => g.Value).ToList();
             foreach (var destinationsPerSourceMapping in destinationsPerSourceMappings)
             {
-                var destinationValue = destinationsPerSourceMapping.Key;
+                var getDestinationObject = destinationsPerSourceMapping.Key;
+
+                if (getDestinationObject.GetDestinationType == GetDestinationType.Exception)
+                {
+                    // Ignore map exception overrides
+                    continue;
+                }
+
+                var destinationValue = getDestinationObject.GetDestinationFunc();
                 var destinationValueAsSourceType = GetDestinationValueAsSourceType(destinationValue, sourceEnumValueType);
 
                 var sourceValues = destinationsPerSourceMapping.Select(x => x.Key).ToList();
@@ -155,7 +169,9 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
                         continue;
                     }
 
-                    var isSourceValueUsedInDestinationPartOfEnumMapping = sourceValueAsDestinationType.HasValue && enumValueMappings.ContainsValue(sourceValueAsDestinationType.Value);
+                    var isSourceValueUsedInDestinationPartOfEnumMapping = sourceValueAsDestinationType.HasValue 
+                                                                          && enumValueMappings.Values.Any(x => x.GetDestinationType == GetDestinationType.Value 
+                                                                              && Equals(x.GetDestinationFunc.Invoke(), sourceValueAsDestinationType.Value));
                     if (!isSourceValueUsedInDestinationPartOfEnumMapping)
                     {
                         // if there is a source which is not a destination part of a mapping, then that mapping cannot reversed

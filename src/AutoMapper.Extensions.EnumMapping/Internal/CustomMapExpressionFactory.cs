@@ -5,10 +5,11 @@ using System.Linq.Expressions;
 namespace AutoMapper.Extensions.EnumMapping.Internal
 {
     internal class CustomMapExpressionFactory<TSource,TDestination>
+        where TDestination : struct, Enum
     {
-        private readonly Dictionary<TSource, TDestination> _enumValueMappings;
+        private readonly Dictionary<TSource, GetDestinationObject<TDestination>> _enumValueMappings;
 
-        public CustomMapExpressionFactory(Dictionary<TSource, TDestination> enumValueMappings)
+        public CustomMapExpressionFactory(Dictionary<TSource, GetDestinationObject<TDestination>> enumValueMappings)
         {
             _enumValueMappings = enumValueMappings;
         }
@@ -21,12 +22,12 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
 
         private TDestination ConvertEnumValue(TSource source)
         {
-            if (!_enumValueMappings.TryGetValue(source, out TDestination result))
+            if (!_enumValueMappings.TryGetValue(source, out var getDestinationObject))
             {
                 throw new AutoMapperMappingException($"Value {source} of type {source.GetType().FullName} not supported");
             }
 
-            return result;
+            return getDestinationObject.GetDestinationFunc.Invoke();
         }
     }
 }
