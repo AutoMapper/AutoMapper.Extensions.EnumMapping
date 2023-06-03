@@ -1,6 +1,6 @@
 AutoMapper.Extensions.EnumMapping
 ===========
-[![CI](https://github.com/automapper/automapper.extensions.microsoft.dependencyinjection/workflows/CI/badge.svg)](https://github.com/automapper/automapper.extensions.microsoft.dependencyinjection/workflows/CI)
+[![CI](https://github.com/AutoMapper/AutoMapper.Extensions.EnumMapping/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/AutoMapper/AutoMapper.Extensions.EnumMapping/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/dt/AutoMapper.Extensions.EnumMapping.svg)](https://www.nuget.org/packages/AutoMapper.Extensions.EnumMapping) 
 [![NuGet](https://img.shields.io/nuget/vpre/AutoMapper.Extensions.EnumMapping.svg)](https://www.nuget.org/packages/AutoMapper.Extensions.EnumMapping)
 [![MyGet (dev)](https://img.shields.io/myget/automapperdev/v/AutoMapper.Extensions.EnumMapping.svg)](http://myget.org/gallery/automapperdev)
