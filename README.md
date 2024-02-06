@@ -11,8 +11,6 @@ The AutoMapper.Extensions.EnumMapping library gives you control about your enum 
 
 This library supports mapping enums values like properties.
 
-This library is Cross-platform, supporting `netstandard2.0` and `net461`.
-
 ### Dependencies
 
 - [AutoMapper](https://www.nuget.org/packages/AutoMapper/) (from version 10.0)
