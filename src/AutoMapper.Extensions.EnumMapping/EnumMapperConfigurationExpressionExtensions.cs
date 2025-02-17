@@ -18,7 +18,7 @@ namespace AutoMapper.Extensions.EnumMapping
             {
                 var validator = context.TypeMap?.Features.Get<EnumMappingValidationRuntimeFeatureProxy>();
 
-                validator?.Validate(context.TypeMap.Types);
+                validator?.Validate(context);
             });
         }
     }

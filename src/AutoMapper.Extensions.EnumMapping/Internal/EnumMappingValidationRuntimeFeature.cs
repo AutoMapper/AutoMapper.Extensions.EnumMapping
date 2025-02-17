@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoMapper.Configuration;
 using AutoMapper.Internal;
 
 namespace AutoMapper.Extensions.EnumMapping.Internal
@@ -22,9 +23,10 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
         {
         }
 
-        void IEnumMappingValidationRuntimeFeature.Validate(TypePair typePair)
+        void IEnumMappingValidationRuntimeFeature.Validate(ValidationContext validationContext)
         {
             var hasMappingError = false;
+            var typePair = validationContext.TypeMap.Types;
             var sourceEnumMappings = Enum.GetValues(typePair.SourceType);
 
             var messageBuilder = new StringBuilder($"Missing enum mapping from {typePair.SourceType.FullName} to {typePair.DestinationType.FullName} based on {_enumMappingType}");
@@ -43,7 +45,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
 
             if (hasMappingError)
             {
-                throw new AutoMapperConfigurationException(messageBuilder.ToString());
+                validationContext.Exceptions.Add(new AutoMapperConfigurationException(messageBuilder.ToString()));
             }
         }
     }

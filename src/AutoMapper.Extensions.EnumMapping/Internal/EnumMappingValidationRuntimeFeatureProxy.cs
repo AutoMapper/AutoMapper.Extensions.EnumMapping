@@ -1,4 +1,5 @@
-﻿using AutoMapper.Internal;
+﻿using AutoMapper.Configuration;
+using AutoMapper.Internal;
 
 namespace AutoMapper.Extensions.EnumMapping.Internal;
 
@@ -13,5 +14,5 @@ internal class EnumMappingValidationRuntimeFeatureProxy : IEnumMappingValidation
 
     public void Seal(IGlobalConfiguration configurationProvider) => _innerValidationRuntimeFeature.Seal(configurationProvider);
 
-    public void Validate(TypePair typePair) => _innerValidationRuntimeFeature.Validate(typePair);
+    public void Validate(ValidationContext validationContext) => _innerValidationRuntimeFeature.Validate(validationContext);
 }
