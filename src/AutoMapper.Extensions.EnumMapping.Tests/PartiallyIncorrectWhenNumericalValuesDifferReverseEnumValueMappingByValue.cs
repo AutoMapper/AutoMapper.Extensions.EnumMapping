@@ -42,7 +42,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                             opts =>
                             {
                                 opts
-                                    .MapByValue()
+                                    .MapByCustom()
                                     .MapValue(Source.Bar, Destination.BAR_ALT_NAME)
                                     .MapValue(Source.Baz, Destination.BAZ_ALT_NAME)
                                     .MapException(Source.Unspecified, () => new InvalidOperationException($"Unspecified values are not supported"));

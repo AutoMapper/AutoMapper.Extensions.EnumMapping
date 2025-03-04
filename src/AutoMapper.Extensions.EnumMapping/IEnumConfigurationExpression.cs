@@ -25,6 +25,12 @@ namespace AutoMapper.Extensions.EnumMapping
         IEnumConfigurationExpression<TSource, TDestination> MapByValue();
 
         /// <summary>
+        /// (default) Map enum values by custom mapping (no default mapping used)
+        /// </summary>
+        /// <returns>Enum configuration options</returns>
+        IEnumConfigurationExpression<TSource, TDestination> MapByCustom();
+
+        /// <summary>
         /// Map enum value from source to destination value
         /// </summary>
         /// <returns>Enum configuration options</returns>
