@@ -6,7 +6,7 @@ using Xunit;
 
 namespace AutoMapper.Extensions.EnumMapping.Tests
 {
-    public class PartiallyIncorrectWhenNumericalValuesDifferReverseEnumValueMappingByValue
+    public class ReverseCustomEnumMappingByCustom
     {
         public class Valid : AutoMapperSpecBase
         {
@@ -54,7 +54,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
             protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
             {
                 cfg.EnableEnumMappingValidation();
-                cfg.AddMaps(typeof(PartiallyIncorrectWhenNumericalValuesDifferReverseEnumValueMappingByValue).GetTypeInfo().Assembly);
+                cfg.AddMaps(typeof(ReverseCustomEnumMappingByCustom).GetTypeInfo().Assembly);
             });
 
             protected override void Because_of()
