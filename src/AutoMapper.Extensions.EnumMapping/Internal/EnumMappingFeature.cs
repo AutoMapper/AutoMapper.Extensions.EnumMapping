@@ -69,7 +69,7 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
                     }
                 }
             }
-            else
+            else if (EnumMappingType == EnumMappingType.Value)
             {
                 var sourceEnumValueType = Enum.GetUnderlyingType(sourceType);
                 var destinationEnumValueType = Enum.GetUnderlyingType(destinationType);
@@ -89,6 +89,10 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
                     }
                 }
             }
+            else
+            {
+               // Custom does not have default mapping
+            }
 
             return enumValueMappings;
         }
@@ -103,6 +107,11 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
         public IEnumConfigurationExpression<TSource, TDestination> MapByValue()
         {
             EnumMappingType = EnumMappingType.Value;
+            return this;
+        }
+        public IEnumConfigurationExpression<TSource, TDestination> MapByCustom()
+        {
+            EnumMappingType = EnumMappingType.Custom;
             return this;
         }
 
@@ -126,9 +135,13 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
             {
                 reverseEnumConfigurationExpression.MapByName(IgnoreCase);
             }
-            else
+            else if (EnumMappingType == EnumMappingType.Value)
             {
                 reverseEnumConfigurationExpression.MapByValue();
+            }
+            else
+            {
+                reverseEnumConfigurationExpression.MapByCustom();
             }
 
             var reverseEnumValueMappingsOverride = new Dictionary<TDestination, TSource>();
@@ -154,31 +167,38 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
                 var sourceValues = destinationsPerSourceMapping.Select(x => x.Key).ToList();
                 
                 var hasDestinationValueSameValueInSource = destinationValueAsSourceType.HasValue && sourceValues.Contains(destinationValueAsSourceType.Value);
-                if (hasDestinationValueSameValueInSource)
+                if (hasDestinationValueSameValueInSource && EnumMappingType != EnumMappingType.Custom)
                 {
                     // if there is a matching source and destination value, then that mapping is preferred and no override is needed
                     continue;
                 }
 
-                foreach (var sourceValue in sourceValues)
+                if (EnumMappingType != EnumMappingType.Custom)
                 {
-                    var hasDestinationSameValueAsSource = HasDestinationSameValueAsSource(sourceValue, destinationEnumValueType, out TDestination? sourceValueAsDestinationType);
-
-                    if (!hasDestinationSameValueAsSource)
+                    foreach (var sourceValue in sourceValues)
                     {
-                        continue;
-                    }
+                        var hasDestinationSameValueAsSource = HasDestinationSameValueAsSource(sourceValue, destinationEnumValueType, out TDestination? sourceValueAsDestinationType);
 
-                    var isSourceValueUsedInDestinationPartOfEnumMapping = sourceValueAsDestinationType.HasValue 
-                                                                          && enumValueMappings.Values.Any(x => x.GetDestinationType == GetDestinationType.Value 
-                                                                              && Equals(x.GetDestinationFunc.Invoke(), sourceValueAsDestinationType.Value));
-                    if (!isSourceValueUsedInDestinationPartOfEnumMapping)
-                    {
-                        // if there is a source which is not a destination part of a mapping, then that mapping cannot reversed
-                        continue;
-                    }
+                        if (!hasDestinationSameValueAsSource)
+                        {
+                            continue;
+                        }
 
-                    reverseEnumValueMappingsOverride.Add(destinationValue, sourceValue);
+                        var isSourceValueUsedInDestinationPartOfEnumMapping = sourceValueAsDestinationType.HasValue
+                                                                              && enumValueMappings.Values.Any(x => x.GetDestinationType == GetDestinationType.Value
+                                                                                  && Equals(x.GetDestinationFunc.Invoke(), sourceValueAsDestinationType.Value));
+                        if (!isSourceValueUsedInDestinationPartOfEnumMapping)
+                        {
+                            // if there is a source which is not a destination part of a mapping, then that mapping cannot reversed
+                            continue;
+                        }
+
+                        reverseEnumValueMappingsOverride.Add(destinationValue, sourceValue);
+                    }
+                }
+                else if (!reverseEnumValueMappingsOverride.ContainsKey(destinationValue) && sourceValues.Count == 1)
+                {
+                    reverseEnumValueMappingsOverride.Add(destinationValue, sourceValues.Single());
                 }
             }
 
@@ -234,9 +254,14 @@ namespace AutoMapper.Extensions.EnumMapping.Internal
                     }
                 }
             }
-            else
+            else if(EnumMappingType == EnumMappingType.Value)
             {
                 destinationValueAsSourceType = (TSource)Convert.ChangeType(destinationValue, sourceEnumValueType);
+            }
+            else
+            {
+                // Custom mapping does not have default
+                destinationValueAsSourceType = null;
             }
 
             return destinationValueAsSourceType;
