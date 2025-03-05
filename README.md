@@ -37,7 +37,7 @@ For method `CreateMap` this library provide a `ConvertUsingEnumMapping` method. 
 
 If you want to change some mappings, then you can use `MapValue` method. This is a chainable method.
 
-Default the enum values are mapped by value, but it is possible to map by name calling  `MapByName()` or  `MapByValue()`.
+Default the enum values are mapped by value (`MapByValue()`), but it is possible to map by name calling `MapByName()`. For enums which does not have same values and names, you can use `MapByCustom()`. Then you have to add a `MapValue` for every source enum value.
 
 ```csharp
 using AutoMapper.Extensions.EnumMapping;
