@@ -6,6 +6,9 @@ using Xunit;
 
 namespace AutoMapper.Extensions.EnumMapping.Tests
 {
+    /// <summary>
+    /// Based on issue #30
+    /// </summary>
     public class ReverseCustomEnumMappingByCustom
     {
         public class Valid : AutoMapperSpecBase
@@ -74,7 +77,6 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                 // Passes
                 var res = Mapper.Map<Destination>(Source.Bar);
                 res.ShouldBe(Destination.BAR_ALT_NAME);
-                //Assert.That(_mapper.Map<Destination>(Source.Bar), Is.EqualTo(Destination.BAR_ALT_NAME));
             }
 
             [Fact]
@@ -83,7 +85,6 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                 // Passes
                 var res = Mapper.Map<Destination>(Source.Baz);
                 res.ShouldBe(Destination.BAZ_ALT_NAME);
-                //Assert.That(_mapper.Map<Destination>(Source.Baz), Is.EqualTo(Destination.BAZ_ALT_NAME));
             }
 
             [Fact]
@@ -93,7 +94,6 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                 Assert.Throws<InvalidOperationException>(() =>
                 {
                     Mapper.Map<Destination>(Source.Unspecified);
-                    //_mapper.Map<Destination>(Source.Unspecified);
                 });
             }
 
@@ -103,16 +103,14 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                 // Passes
                 var res = Mapper.Map<Source>(Destination.BAR_ALT_NAME);
                 res.ShouldBe(Source.Bar);
-                //Assert.That(_mapper.Map<Source>(Destination.BAR_ALT_NAME), Is.EqualTo(Source.Bar));
             }
 
             [Fact]
             public void TestReverseBazMapping()
             {
-                // Failure: Expected: Baz  But was:  Bar
+                // Failure: Expected: Baz  But was:  Bar  => Fixed 
                 var res = Mapper.Map<Source>(Destination.BAZ_ALT_NAME);
                 res.ShouldBe(Source.Baz);
-                //Assert.That(_mapper.Map<Source>(Destination.BAZ_ALT_NAME), Is.EqualTo(Source.Baz));
             }
         } 
     }
