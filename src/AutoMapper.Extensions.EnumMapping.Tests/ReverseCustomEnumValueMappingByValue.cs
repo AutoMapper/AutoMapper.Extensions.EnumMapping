@@ -21,7 +21,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                     .ConvertUsingEnumMapping(opt => opt.MapByValue()
                         .MapValue(Source.OnlyInSource, Destination.Foo))
                     .ReverseMap();
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {
@@ -48,7 +48,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                 cfg.CreateMap<Source, Destination>()
                     .ConvertUsingEnumMapping(opt => opt.MapByValue())
                     .ReverseMap();
-            });
+            }, _loggerFactory);
 
             [Fact]
             public void Should_fail_validation() =>
@@ -71,7 +71,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                     .ConvertUsingEnumMapping(opt => opt.MapByValue()
                         .MapValue(Source.OnlyInSource, Destination.OnlyInDestination))
                     .ReverseMap();
-            });
+            }, _loggerFactory);
             
             protected override void Because_of()
             {
@@ -103,7 +103,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                         .MapValue(Source.InSourceAndDestionation, Destination.D)
                         .MapValue(Source.OnyInSource, Destination.InSourceAndDestionation))
                     .ReverseMap();
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {
@@ -144,7 +144,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                         .MapValue(Source.E, Destination.A)
                     )
                     .ReverseMap();
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {
@@ -187,7 +187,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                         .MapValue(Source.F, Destination.C)
                     )
                     .ReverseMap();
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {

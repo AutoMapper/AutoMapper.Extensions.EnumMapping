@@ -10,6 +10,6 @@ public class EnumMappingValidation
         {
             cfg.EnableEnumMappingValidation();
             cfg.CreateMap<object, object>();
-        });
+        }, _loggerFactory);
     }
 }
