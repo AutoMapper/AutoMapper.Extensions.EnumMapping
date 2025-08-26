@@ -15,7 +15,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
             cfg.EnableEnumMappingValidation();
             cfg.CreateMap<Source, Destination>()
                 .ConvertUsingEnumMapping(opt => opt.MapByValue());
-        });
+        }, _loggerFactory);
 
         protected override void Because_of()
         {

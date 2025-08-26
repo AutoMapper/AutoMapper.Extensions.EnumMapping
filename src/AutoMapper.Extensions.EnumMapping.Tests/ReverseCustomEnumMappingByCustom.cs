@@ -58,7 +58,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
             {
                 cfg.EnableEnumMappingValidation();
                 cfg.AddMaps(typeof(ReverseCustomEnumMappingByCustom).GetTypeInfo().Assembly);
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {

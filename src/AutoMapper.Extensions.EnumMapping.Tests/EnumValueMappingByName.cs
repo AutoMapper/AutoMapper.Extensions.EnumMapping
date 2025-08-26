@@ -18,7 +18,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                 cfg.EnableEnumMappingValidation();
                 cfg.CreateMap<Source, Destination>()
                     .ConvertUsingEnumMapping(opt => opt.MapByName());
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {
@@ -44,7 +44,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                 cfg.EnableEnumMappingValidation();
                 cfg.CreateMap<Source, Destination>()
                     .ConvertUsingEnumMapping(opt => opt.MapByName(true));
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {
@@ -73,7 +73,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                     .ConvertUsingEnumMapping(opt => opt
                         .MapByName()
                         .MapValue(Source.Bar, Destination.Foo));
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {
@@ -97,7 +97,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                 cfg.EnableEnumMappingValidation();
                 cfg.CreateMap<Source, Destination>()
                     .ConvertUsingEnumMapping(opt => opt.MapByName());
-            });
+            }, _loggerFactory);
 
             [Fact]
             public void Should_fail_validation() =>
@@ -118,7 +118,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                     .ConvertUsingEnumMapping(opt => opt
                         .MapByName()
                         .MapValue(Source.Bar, Destination.Foo));
-            });
+            }, _loggerFactory);
             
             [Fact]
             public void Should_fail_validation() =>

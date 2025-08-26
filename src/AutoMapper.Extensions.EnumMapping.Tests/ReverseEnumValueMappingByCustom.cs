@@ -24,7 +24,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                         .MapValue(Source.Bar, Destination.Bar)
                     )
                     .ReverseMap();
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {
@@ -56,7 +56,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                         .MapValue(Source.Bar, Destination.Bar)
                     )
                     .ReverseMap();
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {
@@ -85,7 +85,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                      .MapValue(Source.Bar, Destination.Bar)
                 )
                 .ReverseMap();
-            });
+            }, _loggerFactory);
 
             [Fact]
             public void Should_fail_validation() =>
@@ -109,7 +109,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                         .MapException(Source.Foo, () => new NotSupportedException($"Foo is not valid value"))
                         .MapValue(Source.Bar, Destination.Bar))
                     .ReverseMap();
-            });
+            }, _loggerFactory);
 
             [Fact]
             public void Should_fail_validation() =>
@@ -135,7 +135,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests
                         .MapValue(Source.Default, Destination.Default)
                         .MapValue(Source.Bar, Destination.Bar))
                     .ReverseMap(optr => optr.MapByCustom().MapValue(Destination.Foo, Source.Bar));
-            });
+            }, _loggerFactory);
 
             protected override void Because_of()
             {

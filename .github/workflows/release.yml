@@ -8,6 +8,8 @@ jobs:
   build:
     strategy:
       fail-fast: false
+      matrix:
+        dotnet-version: [8.0.x]
     runs-on: windows-latest
     steps:
     - name: Checkout

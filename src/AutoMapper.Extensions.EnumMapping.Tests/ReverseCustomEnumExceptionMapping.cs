@@ -22,7 +22,7 @@ public class ReverseCustomEnumExceptionMapping
                     .MapException(Source.B, () => new NotSupportedException($"B is not valid value"))
                 )
                 .ReverseMap();
-        });
+        }, _loggerFactory);
 
         protected override void Because_of()
         {

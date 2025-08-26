@@ -21,7 +21,7 @@ public class EnumValueMappingToException
                     .MapValue(Source.A, Destination.A)
                     .MapException(Source.B, () => new NotSupportedException($"B is not valid value"))
                 );
-        });
+        }, _loggerFactory);
 
         protected override void Because_of()
         {
@@ -49,7 +49,7 @@ public class EnumValueMappingToException
                     .MapValue(Source.A, Destination.A)
                     .MapException(Source.B, () => new NotSupportedException($"B is not valid value"))
                 );
-        });
+        }, _loggerFactory);
 
         protected override void Because_of()
         {
