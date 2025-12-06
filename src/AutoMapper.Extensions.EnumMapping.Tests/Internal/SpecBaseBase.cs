@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace AutoMapper.Extensions.EnumMapping.Tests.Internal
 {
@@ -8,7 +9,7 @@ namespace AutoMapper.Extensions.EnumMapping.Tests.Internal
 
         static SpecBaseBase()
         {
-            _loggerFactory = new LoggerFactory();
+            _loggerFactory = new NullLoggerFactory();
         }
 
         protected virtual void MainSetup()
